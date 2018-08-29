@@ -1,7 +1,7 @@
 package com.vwfsag.fso.service;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 public interface EncryptService {

@@ -14,7 +14,7 @@ import org.apache.http.util.EntityUtils;
 import com.vwfsag.fso.service.EncryptServiceImpl;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 public class HttpClientTest {

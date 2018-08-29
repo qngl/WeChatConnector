@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 @Service

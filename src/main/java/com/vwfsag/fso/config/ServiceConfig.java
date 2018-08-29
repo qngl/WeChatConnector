@@ -10,7 +10,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 /**
- * @author liqiang
+ * @author qngl
  */
 @Configuration
 @EnableTransactionManagement

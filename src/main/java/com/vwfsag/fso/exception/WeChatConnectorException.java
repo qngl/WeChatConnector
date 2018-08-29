@@ -1,7 +1,7 @@
 package com.vwfsag.fso.exception;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 public class WeChatConnectorException extends RuntimeException {

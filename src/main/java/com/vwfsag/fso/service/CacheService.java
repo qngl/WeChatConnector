@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 public interface CacheService {

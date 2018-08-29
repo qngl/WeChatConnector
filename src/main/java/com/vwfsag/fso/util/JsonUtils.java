@@ -1,4 +1,4 @@
-package com.vwfsag.fso.view.vo;
+package com.vwfsag.fso.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * @author liqiang
+ * @author qngl
  *
  */
 public class JsonUtils {

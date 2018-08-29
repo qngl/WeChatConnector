@@ -11,17 +11,16 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.vwfsag.fso.view.interceptor.ContentInterceptor;
-import com.vwfsag.fso.view.interceptor.SecurityInterceptor;
+import com.vwfsag.fso.interceptor.SecurityInterceptor;
 
 /**
  * All the web app configuration happens here
- * 
- * @author liqiang
+ *
+ * @author qngl
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.vwfsag.fso.view.controller")
+@ComponentScan("com.vwfsag.fso.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -49,15 +48,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return new SecurityInterceptor();
 	}
 
-	@Bean
-	public ContentInterceptor contentInterceptor() {
-		return new ContentInterceptor();
-	}
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(securityInterceptor());
-		registry.addInterceptor(contentInterceptor());
 	}
 
 }
