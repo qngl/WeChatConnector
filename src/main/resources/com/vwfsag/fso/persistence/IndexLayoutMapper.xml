@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vwfsag.fso.persistence.IndexLayoutMapper">
+
+	<resultMap id="ResultMap" type="IndexLayout">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="product_id" property="productId" jdbcType="INTEGER" />
+		<result column="activity_layout_id" property="activityLayoutId" jdbcType="INTEGER" />
+		<result column="layout_type" property="layoutType" jdbcType="INTEGER" />
+		<result column="source_url" property="sourceURL" jdbcType="VARCHAR" />
+		<result column="target_url" property="targetURL" jdbcType="VARCHAR" />
+		<result column="layout_sort" property="layoutSort" jdbcType="INTEGER" />
+		<result column="online_time" property="onlineTime" jdbcType="BIGINT" />
+		<result column="display_title" property="displayTitle" jdbcType="VARCHAR" />
+		<result column="display_subtitle" property="displaySubtitle" jdbcType="VARCHAR" />
+		<result column="display_details" property="displayDetails" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getById" resultMap="ResultMap">
+		SELECT * FROM mis_index_layout WHERE ID = #{id}
+	</select>
+	
+	<select id="getByType" resultMap="ResultMap" parameterType="IndexLayout">
+		SELECT * FROM mis_index_layout WHERE layout_type = #{layoutType} 
+		<if test="status != null">
+			AND status = #{status} 
+		</if>
+		ORDER BY layout_sort asc, online_time desc
+	</select>
+
+	<insert id="insert" parameterType="IndexLayout">
+		INSERT INTO mis_index_layout (product_id, activity_layout_id, layout_type,
+		source_url, target_url, layout_sort, display_title, display_subtitle, display_details, status, online_time)
+		VALUES
+		(#{productId}, #{activityLayoutId}, #{layoutType}, #{sourceURL}, #{targetURL}, #{layoutSort}, #{displayTitle},
+		#{displaySubtitle}, #{displayDetails}, #{status}, #{onlineTime})
+	</insert>
+
+	<update id="update" parameterType="IndexLayout">
+		UPDATE mis_index_layout
+		<set>
+			<if test="productId != null">
+				product_id = #{productId},
+			</if>
+			<if test="activityLayoutId != null">
+				activity_layout_id = #{activityLayoutId},
+			</if>
+			<if test="sourceURL != null">
+				source_url = #{sourceURL},
+			</if>
+			<if test="targetURL != null">
+				target_url = #{targetURL},
+			</if>
+			<if test="layoutSort != null">
+				layout_sort = #{layoutSort},
+			</if>
+			<if test="displayTitle != null">
+				display_title = #{displayTitle},
+			</if>
+			<if test="displaySubtitle != null">
+				display_subtitle = #{displaySubtitle},
+			</if>
+			<if test="displayDetails != null">
+				display_details = #{displayDetails},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="onlineTime != null">
+				online_time = #{onlineTime}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM mis_index_layout WHERE id = #{id}
+	</delete>
+</mapper>

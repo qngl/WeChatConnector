@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vwfsag.fso.persistence.ProductMapper">
+	<resultMap id="BaseResultMap" type="Product">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="logo" jdbcType="VARCHAR" property="logo" />
+		<result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+		<result column="imgs_banner" jdbcType="VARCHAR" property="imgsBanner" />
+		<result column="imgs_details" jdbcType="VARCHAR" property="imgsDetails" />
+		<result column="car_parameters" jdbcType="VARCHAR" property="carParameters" />
+		<result column="activity_title" jdbcType="VARCHAR" property="activityTitle" />
+		<result column="activity_rules" jdbcType="VARCHAR" property="activityRules" />
+		<result column="car_prices" jdbcType="VARCHAR" property="carPrices" />
+		<result column="colors" jdbcType="VARCHAR" property="colors" />
+		<result column="types" jdbcType="VARCHAR" property="types" />
+		<result column="activity_deposit" jdbcType="INTEGER" property="activityDeposit" />
+		<result column="product_status" jdbcType="INTEGER" property="productStatus" />
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, logo, icon_url, imgs_banner, imgs_details, car_parameters,
+		activity_title, colors, types,
+		activity_rules, car_prices, activity_deposit, product_status, create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from c_product
+		where id = #{id}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from c_product
+		order by create_time desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from c_product
+		where id = #{id}
+	</delete>
+	<insert id="insert" parameterType="Product">
+		insert into c_product (id, name, logo,
+		icon_url, imgs_banner, imgs_details, colors, types,
+		car_parameters, activity_title, activity_rules,
+		car_prices, activity_deposit, product_status,
+		create_time)
+		values (#{id}, #{name}, #{logo},
+		#{iconUrl}, #{imgsBanner}, #{imgsDetails}, #{colors}, #{types},
+		#{carParameters}, #{activityTitle}, #{activityRules},
+		#{carPrices}, #{activityDeposit}, #{productStatus},
+		#{createTime})
+	</insert>
+	<insert id="insertSelective" parameterType="Product">
+		insert into c_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="logo != null">
+				logo,
+			</if>
+			<if test="iconUrl != null">
+				icon_url,
+			</if>
+			<if test="imgsBanner != null">
+				imgs_banner,
+			</if>
+			<if test="imgsDetails != null">
+				imgs_details,
+			</if>
+			<if test="carParameters != null">
+				car_parameters,
+			</if>
+			<if test="activityTitle != null">
+				activity_title,
+			</if>
+			<if test="activityRules != null">
+				activity_rules,
+			</if>
+			<if test="carPrices != null">
+				car_prices,
+			</if>
+			<if test="colors != null">
+				colors,
+			</if>
+			<if test="types != null">
+				types,
+			</if>
+			<if test="activityDeposit != null">
+				activity_deposit,
+			</if>
+			<if test="productStatus != null">
+				product_status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="logo != null">
+				#{logo},
+			</if>
+			<if test="iconUrl != null">
+				#{iconUrl},
+			</if>
+			<if test="imgsBanner != null">
+				#{imgsBanner},
+			</if>
+			<if test="imgsDetails != null">
+				#{imgsDetails},
+			</if>
+			<if test="carParameters != null">
+				#{carParameters},
+			</if>
+			<if test="activityTitle != null">
+				#{activityTitle},
+			</if>
+			<if test="activityRules != null">
+				#{activityRules},
+			</if>
+			<if test="carPrices != null">
+				#{carPrices},
+			</if>
+			<if test="colors != null">
+				#{colors},
+			</if>
+			<if test="types != null">
+				#{types},
+			</if>
+			<if test="activityDeposit != null">
+				#{activityDeposit},
+			</if>
+			<if test="productStatus != null">
+				#{productStatus},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="Product">
+		update c_product
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="logo != null">
+				logo = #{logo},
+			</if>
+			<if test="iconUrl != null">
+				icon_url = #{iconUrl},
+			</if>
+			<if test="imgsBanner != null">
+				imgs_banner = #{imgsBanner},
+			</if>
+			<if test="imgsDetails != null">
+				imgs_details = #{imgsDetails},
+			</if>
+			<if test="carParameters != null">
+				car_parameters = #{carParameters},
+			</if>
+			<if test="activityTitle != null">
+				activity_title = #{activityTitle},
+			</if>
+			<if test="activityRules != null">
+				activity_rules = #{activityRules},
+			</if>
+			<if test="carPrices != null">
+				car_prices = #{carPrices},
+			</if>
+			<if test="colors != null">
+				colors = #{colors},
+			</if>
+			<if test="types != null">
+				types = #{types},
+			</if>
+			<if test="activityDeposit != null">
+				activity_deposit = #{activityDeposit},
+			</if>
+			<if test="productStatus != null">
+				product_status = #{productStatus},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="Product">
+		update c_product
+		set name = #{name},
+		logo = #{logo},
+		icon_url = #{iconUrl},
+		imgs_banner = #{imgsBanner},
+		imgs_details = #{imgsDetails},
+		car_parameters = #{carParameters},
+		activity_title = #{activityTitle},
+		activity_rules = #{activityRules},
+		car_prices = #{carPrices},
+		colors = #{colors},
+		types = #{types},
+		activity_deposit = #{activityDeposit},
+		product_status = #{productStatus},
+		create_time = #{createTime}
+		where id = #{id}
+	</update>
+</mapper>

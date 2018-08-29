@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vwfsag.fso.persistence.ProductItemMapper">
+	<resultMap id="BaseResultMap" type="ProductItem">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="product_id" property="productId" jdbcType="INTEGER" />
+		<result column="type_id" property="typeId" jdbcType="INTEGER" />
+		<result column="type_name" property="typeName" jdbcType="VARCHAR" />
+		<result column="type_value" property="typeValue" jdbcType="VARCHAR" />
+		<result column="color_id" property="colorId" jdbcType="INTEGER" />
+		<result column="color_name" property="colorName" jdbcType="VARCHAR" />
+		<result column="color_value" property="colorValue" jdbcType="VARCHAR" />
+		<result column="sku_price" property="skuPrice" jdbcType="VARCHAR" />
+		<result column="sku_status" property="skuStatus" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, product_id, type_id, type_name, type_value, color_id, color_name,
+		color_value,
+		sku_price, sku_status, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from c_item_sku
+		where id = #{id}
+	</select>
+	<select id="selectByProductId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from c_item_sku
+		where product_id = #{productId} order by type_id, color_id
+	</select>
+	<select id="selectByProductIdTypeIdColorId" resultMap="BaseResultMap" parameterType="ProductItem">
+		select
+		<include refid="Base_Column_List" />
+		from c_item_sku
+		where product_id = #{productId} and type_id = #{typeId} and color_id = #{colorId}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from c_item_sku
+		where id = #{id}
+	</delete>
+	<insert id="insert" parameterType="ProductItem">
+		insert into c_item_sku (id, product_id, type_id,
+		type_name, type_value, color_id,
+		color_name, color_value, sku_price,
+		sku_status, create_time)
+		values (#{id}, #{productId},
+		#{typeId},
+		#{typeName}, #{typeValue}, #{colorId},
+		#{colorName}, #{colorValue},
+		#{skuPrice},
+		#{skuStatus}, #{createTime})
+	</insert>
+	<insert id="insertSelective" parameterType="ProductItem">
+		insert into c_item_sku
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="productId != null">
+				product_id,
+			</if>
+			<if test="typeId != null">
+				type_id,
+			</if>
+			<if test="typeName != null">
+				type_name,
+			</if>
+			<if test="typeValue != null">
+				type_value,
+			</if>
+			<if test="colorId != null">
+				color_id,
+			</if>
+			<if test="colorName != null">
+				color_name,
+			</if>
+			<if test="colorValue != null">
+				color_value,
+			</if>
+			<if test="skuPrice != null">
+				sku_price,
+			</if>
+			<if test="skuStatus != null">
+				sku_status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="productId != null">
+				#{productId},
+			</if>
+			<if test="typeId != null">
+				#{typeId},
+			</if>
+			<if test="typeName != null">
+				#{typeName},
+			</if>
+			<if test="typeValue != null">
+				#{typeValue},
+			</if>
+			<if test="colorId != null">
+				#{colorId},
+			</if>
+			<if test="colorName != null">
+				#{colorName},
+			</if>
+			<if test="colorValue != null">
+				#{colorValue},
+			</if>
+			<if test="skuPrice != null">
+				#{skuPrice},
+			</if>
+			<if test="skuStatus != null">
+				#{skuStatus},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="ProductItem">
+		update c_item_sku
+		<set>
+			<if test="productId != null">
+				product_id = #{productId},
+			</if>
+			<if test="typeId != null">
+				type_id = #{typeId},
+			</if>
+			<if test="typeName != null">
+				type_name = #{typeName},
+			</if>
+			<if test="typeValue != null">
+				type_value = #{typeValue},
+			</if>
+			<if test="colorId != null">
+				color_id = #{colorId},
+			</if>
+			<if test="colorName != null">
+				color_name = #{colorName},
+			</if>
+			<if test="colorValue != null">
+				color_value = #{colorValue},
+			</if>
+			<if test="skuPrice != null">
+				sku_price = #{skuPrice},
+			</if>
+			<if test="skuStatus != null">
+				sku_status = #{skuStatus},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="ProductItem">
+		update c_item_sku
+		set product_id = #{productId},
+		type_id = #{typeId},
+		type_name = #{typeName},
+		type_value = #{typeValue},
+		color_id = #{colorId},
+		color_name = #{colorName},
+		color_value = #{colorValue},
+		sku_price = #{skuPrice},
+		sku_status = #{skuStatus},
+		create_time = #{createTime}
+		where id = #{id}
+	</update>
+</mapper>

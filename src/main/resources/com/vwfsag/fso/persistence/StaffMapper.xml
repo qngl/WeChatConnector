@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vwfsag.fso.persistence.StaffMapper">
+
+	<resultMap id="staffResultMap" type="Staff">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="userName" jdbcType="VARCHAR" />
+		<result column="FULLNAME" property="fullName" jdbcType="VARCHAR" />
+		<result column="USERROLE" property="role" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="BIGINT" />
+	</resultMap>
+
+	<select id="getById" resultMap="staffResultMap">
+		SELECT * FROM MIS_STAFF WHERE ID = #{id}
+	</select>
+
+	<select id="getByUserName" resultMap="staffResultMap">
+		SELECT * FROM MIS_STAFF WHERE USERNAME = #{userName}
+	</select>
+
+	<select id="getAll" resultMap="staffResultMap">
+		SELECT * FROM MIS_STAFF ORDER BY USERROLE, USERNAME
+	</select>
+
+	<select id="getByRole" resultMap="staffResultMap">
+		SELECT * FROM MIS_STAFF WHERE USERROLE = #{role} ORDER BY USERNAME
+	</select>
+
+	<insert id="insert" parameterType="Staff">
+		INSERT INTO MIS_STAFF (USERNAME, USERROLE, FULLNAME, PASSWORD, CREATE_TIME)
+		VALUES
+		(#{userName}, #{role}, #{fullName}, #{password}, #{createTime})
+	</insert>
+
+	<update id="update" parameterType="Staff">
+		UPDATE MIS_STAFF
+		<set>
+			<if test="fullName != null">
+				FULLNAME = #{fullName},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password}
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+</mapper>
